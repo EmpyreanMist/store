@@ -1,5 +1,10 @@
 package com.spring_boot_course.store;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+@Service("stripe")
+@Primary
 public class StripePaymentService implements PaymentService {
 
     @Override
