@@ -1,13 +1,11 @@
 package com.spring_boot_course.store;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("stripe")
-@Primary
+// @Service("stripe")
+// @Primary
 public class StripePaymentService implements PaymentService {
     @Value("${stripe.apiUrl}") // Injects value from application.properties into field variable
     private String apiUrl;
