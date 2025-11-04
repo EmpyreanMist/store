@@ -3,7 +3,9 @@ package com.spring_boot_course.store.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +26,30 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Address> addresses = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_tags",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags = new HashSet<>();
+
+    public User() {
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 
     @Override
     public String toString() {
@@ -34,6 +60,12 @@ public class User {
                 ", password='" + password + '\'' +
                 ", addresses=" + addresses +
                 '}';
+    }
+
+    public void addTag(String tagName) {
+        var tag = new Tag(tagName);
+        tags.add(tag);
+        tag.getUsers().add(this);
     }
 
     public void removeAddress(Address address) {
@@ -52,15 +84,6 @@ public class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
-    }
-
-    public User() {
-    }
-
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
     }
 
     public Long getId() {
