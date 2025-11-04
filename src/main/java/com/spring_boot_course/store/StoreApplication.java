@@ -11,7 +11,7 @@ public class StoreApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
 
-        var userService = context.getBean(UserService.class);
+/*        var userService = context.getBean(UserService.class);
         User user = new User(
                 1L,
                 "Christianmail@com",
@@ -19,5 +19,6 @@ public class StoreApplication {
                 "Christian"
         );
         userService.registerUser(user);
+    */
     }
 }
