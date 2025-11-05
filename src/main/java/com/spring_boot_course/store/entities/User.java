@@ -24,6 +24,8 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
     @OneToMany(mappedBy = "user")
     private List<Address> addresses = new ArrayList<>();
     @ManyToMany
@@ -36,11 +38,18 @@ public class User {
 
     public User() {
     }
-
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public Set<Tag> getTags() {

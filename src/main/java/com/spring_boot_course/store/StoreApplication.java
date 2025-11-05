@@ -1,6 +1,6 @@
 package com.spring_boot_course.store;
 
-import com.spring_boot_course.store.entities.Tag;
+import com.spring_boot_course.store.entities.Profile;
 import com.spring_boot_course.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class StoreApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
         User user = new User(
                 "Christian",
@@ -19,20 +19,13 @@ public class StoreApplication {
                 "123"
         );
 
-/*        Address address = new Address(
-                "street",
-                "city",
-                "state",
-                "zipcode"
-        );*/
+        Profile profile = new Profile();
+        profile.setBio("bio");
 
-/*
-        user.addAddress(address);
-*/
-        var tag = new Tag("tag1");
+        // connect both sides
+        user.setProfile(profile);
+        profile.setUser(user);
 
-        user.addTag("tag1");
-        System.out.println(tag);
-
+        System.out.println(user);
     }
 }

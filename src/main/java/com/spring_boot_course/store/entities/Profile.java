@@ -23,6 +23,29 @@ public class Profile {
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints;
 
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", bio='" + bio + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", loyaltyPoints=" + loyaltyPoints +
+                '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    private User user;
     public Profile() {}
 
     public Profile(String bio, String phoneNumber, LocalDate dateOfBirth, Integer loyaltyPoints) {
