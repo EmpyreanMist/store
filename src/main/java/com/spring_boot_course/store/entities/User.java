@@ -28,13 +28,33 @@ public class User {
     private Profile profile;
     @OneToMany(mappedBy = "user")
     private List<Address> addresses = new ArrayList<>();
+
+    public Set<Product> getFavoriteProducts() {
+        return favoriteProducts;
+    }
+
+    public void setFavoriteProducts(Set<Product> favoriteProducts) {
+        this.favoriteProducts = favoriteProducts;
+    }
+
     @ManyToMany
     @JoinTable(
             name = "user_tags",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+
+
+
     private Set<Tag> tags = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "wishlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> favoriteProducts = new HashSet<>();
+
 
     public User() {
     }
