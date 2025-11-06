@@ -1,6 +1,6 @@
 package com.spring_boot_course.store;
 
-import com.spring_boot_course.store.repositories.UserRepository;
+import com.spring_boot_course.store.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,8 +11,10 @@ public class StoreApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
-        var repository = context.getBean(UserRepository.class);
+        var service = context.getBean(UserService.class);
+        service.showEntityStates();
 
+        //var repository = context.getBean(UserRepository.class);
         //var user = repository.findById(1L).orElseThrow(); // find a user by id 1, or thor exception
         //repository.findAll().forEach(u -> System.out.println(u.getName())); // Print all user names
         // repository.deleteById(1L); // Deletes a user from database by its id

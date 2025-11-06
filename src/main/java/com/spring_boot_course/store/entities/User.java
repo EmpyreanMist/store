@@ -26,6 +26,7 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Profile profile;
+
     @OneToMany(mappedBy = "user")
     private List<Address> addresses = new ArrayList<>();
 
