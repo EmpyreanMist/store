@@ -12,7 +12,7 @@ public class StoreApplication {
         ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
         var service = context.getBean(UserService.class);
-        service.manageProducts();
+        service.updateProductPrices();
 
         //var repository = context.getBean(UserRepository.class);
         //var user = repository.findById(1L).orElseThrow(); // find a user by id 1, or thor exception

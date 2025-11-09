@@ -1,7 +1,10 @@
 package com.spring_boot_course.store.repositories;
 
 import com.spring_boot_course.store.entities.Product;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,7 +25,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByPriceGreaterThan(BigDecimal price);
     List<Product> findByPriceGreaterThanEqual(BigDecimal price);
     List<Product> findByPriceLessThanEqual(BigDecimal price);
-    List<Product> findPriceBetween(BigDecimal min, BigDecimal max);
+    List<Product> findByPriceBetween(BigDecimal min, BigDecimal max);
 
     // Null
     List<Product> findByDescriptionNull();
@@ -38,4 +41,15 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findTop6ByNameOrderByPrice(String name);
     List<Product> findFirst6ByNameLikeOrderByPrice(String name);
 
+    // Find products whose prices are in a given range and sort by name
+    // SQL or JPQL
+    @Query("select p from Product p join p.category where p.price between :min and :max order by p.name")
+    List<Product> findProducts(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
+
+    @Query("select count(*) from Product p where p.price between :min and :max")
+    long countProducts(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
+
+    @Modifying
+    @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
+    void updatePriceByCategory(BigDecimal newPrice, Byte categoryId);
 }

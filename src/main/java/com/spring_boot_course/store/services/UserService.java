@@ -7,6 +7,8 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Service
 public class UserService {
 
@@ -30,6 +32,10 @@ public class UserService {
         productRepository.deleteById(4L);
     }
 
+    @Transactional
+    public void updateProductPrices() {
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte)1);
+    }
 
     @Transactional
     public void showEntityStates() {
@@ -88,4 +94,6 @@ public class UserService {
         user.removeAddress(address);
         userRepository.save(user);
     }
+
+
 }
