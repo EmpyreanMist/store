@@ -15,7 +15,6 @@ public class UserService {
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
     private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
 
     public UserService(UserRepository userRepository, ProfileRepository profileRepository, EntityManager entityManager, AddressRepository addressRepository, ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
@@ -23,7 +22,6 @@ public class UserService {
         this.entityManager = entityManager;
         this.addressRepository = addressRepository;
         this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
     }
 
 
