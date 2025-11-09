@@ -143,4 +143,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void addFavoriteProduct(Product product) {
+        favoriteProducts.add(product);
+    }
 }

@@ -2,9 +2,7 @@ package com.spring_boot_course.store.services;
 
 import com.spring_boot_course.store.entities.Address;
 import com.spring_boot_course.store.entities.User;
-import com.spring_boot_course.store.repositories.AddressRepository;
-import com.spring_boot_course.store.repositories.ProfileRepository;
-import com.spring_boot_course.store.repositories.UserRepository;
+import com.spring_boot_course.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +14,22 @@ public class UserService {
     private final ProfileRepository profileRepository;
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public UserService(UserRepository userRepository, ProfileRepository profileRepository, EntityManager entityManager, AddressRepository addressRepository) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, EntityManager entityManager, AddressRepository addressRepository, ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
         this.entityManager = entityManager;
         this.addressRepository = addressRepository;
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
+
+    @Transactional
+    public void manageProducts() {
+        productRepository.deleteById(4L);
     }
 
 

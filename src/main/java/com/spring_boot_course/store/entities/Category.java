@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name = "categories")
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Byte id;
 
@@ -17,6 +18,13 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products = new HashSet<>();
+
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
 
     public Byte getId() {
         return id;
