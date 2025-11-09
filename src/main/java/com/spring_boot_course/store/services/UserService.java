@@ -1,6 +1,7 @@
 package com.spring_boot_course.store.services;
 
 import com.spring_boot_course.store.entities.Address;
+import com.spring_boot_course.store.entities.Category;
 import com.spring_boot_course.store.entities.User;
 import com.spring_boot_course.store.repositories.*;
 import jakarta.persistence.EntityManager;
@@ -95,5 +96,9 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void fetchProducts() {
+        var products = productRepository.findByCategory(new Category((byte)1));
+        products.forEach(System.out::println);
+    }
 
 }
