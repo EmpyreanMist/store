@@ -1,6 +1,8 @@
 package com.spring_boot_course.store.services;
 
+import com.spring_boot_course.store.entities.Address;
 import com.spring_boot_course.store.entities.User;
+import com.spring_boot_course.store.repositories.AddressRepository;
 import com.spring_boot_course.store.repositories.ProfileRepository;
 import com.spring_boot_course.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -13,11 +15,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final EntityManager entityManager;
+    private final AddressRepository addressRepository;
 
-    public UserService(UserRepository userRepository, ProfileRepository profileRepository, EntityManager entityManager) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, EntityManager entityManager, AddressRepository addressRepository) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
         this.entityManager = entityManager;
+        this.addressRepository = addressRepository;
     }
 
 
@@ -48,5 +52,26 @@ public class UserService {
     public void showRelatedEntityStates() {
         var profile = profileRepository.findById(2L).orElseThrow();
         System.out.println(profile.getUser().getEmail());
+    }
+
+    public void fetchAddress() {
+        var address = addressRepository.findById(1L).orElseThrow();
+    }
+
+    public void persistRelated() {
+        var profile = new User();
+        profile.setName("Chris");
+        profile.setEmail("mail@mail.com");
+        profile.setPassword("password");
+
+        var address = new Address();
+        address.setStreet("street");
+        address.setCity("city");
+        address.setState("state");
+        address.setZip("zip");
+
+        profile.addAddress(address);
+
+        userRepository.save(profile);
     }
 }

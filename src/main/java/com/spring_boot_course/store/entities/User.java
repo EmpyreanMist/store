@@ -27,7 +27,7 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Address> addresses = new ArrayList<>();
 
     public Set<Product> getFavoriteProducts() {
